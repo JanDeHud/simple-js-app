@@ -73,7 +73,7 @@ let pokemonRepository = (function(){
         item.imageUrlBack = details.sprites.back_default;
         item.height = details.height;
         item.weight = details.weight;
-        item.types = details.types;
+        item.types = details.types.type;
         item.abilities = details.abilities;
         })
         .catch(function (e) {
@@ -96,7 +96,7 @@ let pokemonRepository = (function(){
         let heightElement = $("<p>" + "height : " + pokemon.height + "</p>");
         let weightElement = $("<p>" + "weight : " + pokemon.weight + "</p>");
         let typeElement = $("<p>" + "type : " + pokemon.types + "</p>");
-        let abilitiesElement = $("<p>" + "abilities : " + pokemon.abilities + "</p>");
+        let abilitiesElement = $("<p>" + "abilities : " + pokemon.abilities.name + "</p>");
         
         modalTitle.append(nameElement);
         modalBody.append(pokeImageFront);
