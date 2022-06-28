@@ -73,7 +73,7 @@ let pokemonRepository = (function(){
         item.imageUrlBack = details.sprites.back_default;
         item.height = details.height;
         item.weight = details.weight;
-        item.types = details.types.type;
+        item.types = details.types;
         item.abilities = details.abilities;
         })
         .catch(function (e) {
@@ -84,19 +84,36 @@ let pokemonRepository = (function(){
     function showModal (pokemon) {
         let modalBody = $(".modal-body");
         let modalTitle = $(".modal-title");
-        
+        let typeElement = "<p> type : ";
+        let abilitiesElement ="<p> abilities : ";
+
         modalTitle.empty();
         modalBody.empty();
-        
-        let nameElement = $("<h1>" + pokemon.name + "</h1>");
+        //pokemon.name
+        let nameElement = $("<h1>" + pokemon.name  + "</h1>");
         let pokeImageFront = $("<img class='modal-img' style='width:50%'>");
         pokeImageFront.attr("src", pokemon.imageUrlFront);
         let pokeImageBack = $("<img class='modal-img' style='width:50%'>");
         pokeImageBack.attr("src", pokemon.imageUrlBack);
         let heightElement = $("<p>" + "height : " + pokemon.height + "</p>");
         let weightElement = $("<p>" + "weight : " + pokemon.weight + "</p>");
-        let typeElement = $("<p>" + "type : " + pokemon.types + "</p>");
-        let abilitiesElement = $("<p>" + "abilities : " + pokemon.abilities[0].name + "</p>");
+        for (let i = 0; i < pokemon.types.length; i++) {
+            if (i<pokemon.types.length-1) {
+                typeElement +=  pokemon.types[i].type.name + ", ";
+            }else{
+                typeElement +=  pokemon.types[i].type.name + "</p>";
+            }  
+
+            
+          }; 
+          for (let i = 0; i < pokemon.abilities.length; i++) {
+            if (i<pokemon.abilities.length-1) {
+                abilitiesElement += pokemon.abilities[i].ability.name + ", ";
+            }else{
+                abilitiesElement += pokemon.abilities[i].ability.name + "</p>";
+            }  
+            };
+         
         
         modalTitle.append(nameElement);
         modalBody.append(pokeImageFront);
